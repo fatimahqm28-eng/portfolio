@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fatimah Al Qawasmi — Information Technology</title>
+<meta name="description" content="Fatimah Al Qawasmi — IT student building systems from logic gates to databases to full C++ applications. Portfolio of coursework and projects.">
+<meta property="og:title" content="Fatimah Al Qawasmi — Information Technology">
+<meta property="og:description" content="Building systems from the ground up — from truth tables and logic gates, to normalized databases, to full C++ applications.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231B2430'/%3E%3Ctext x='50' y='68' font-size='58' font-family='monospace' fill='%232F6F6B' text-anchor='middle'%3E%3C/%3E%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F6;
+    --ink:#1B2430;
+    --ink-soft:#4B5563;
+    --line:#D8DBDE;
+    --accent:#2F6F6B;
+    --accent-dim:#DCE7E6;
+    --paper-raised:#F2F0EA;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:76px;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+
+  ::selection{background:var(--accent); color:var(--paper);}
+
+  /* ---- layout shell ---- */
+  .wrap{max-width:860px; margin:0 auto; padding:0 32px;}
+
+  /* ---- nav ---- */
+  header.nav{
+    position:sticky; top:0; z-index:20;
+    background:rgba(250,249,246,0.86);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:860px; margin:0 auto; padding:18px 32px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .nav-mark{font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem; letter-spacing:0.01em;}
+  .nav-links{display:flex; gap:28px; font-size:0.82rem;}
+  .nav-links a{
+    text-decoration:none; color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.02em;
+  }
+  .nav-links a:hover{color:var(--accent);}
+  .nav-links a.active{color:var(--accent);}
+
+  /* ---- hero ---- */
+  .hero{padding:100px 0 80px;}
+  .hero .comment{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+    color:var(--accent);
+    margin-bottom:22px;
+    display:block;
+  }
+  .hero h1{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(2.6rem, 6vw, 4.2rem);
+    line-height:1.04;
+    margin:0 0 20px;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 em{font-style:italic; color:var(--accent); font-weight:500;}
+  .hero p.lede{
+    max-width:520px;
+    color:var(--ink-soft);
+    font-size:1.08rem;
+    margin:0 0 34px;
+  }
+  .hero .query{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.88rem;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:18px 22px;
+    color:var(--ink);
+    display:inline-block;
+    line-height:1.7;
+  }
+  .query .kw{color:var(--accent); font-weight:500;}
+  .query .str{color:#8a5a3a;}
+  .cursor{
+    display:inline-block; width:7px; height:1em; background:var(--accent);
+    vertical-align:text-bottom; margin-left:2px;
+    animation:blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+
+  /* ---- section scaffolding ---- */
+  section{padding:64px 0; border-top:1px solid var(--line);}
+  .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    color:var(--accent);
+    letter-spacing:0.03em;
+    margin-bottom:28px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .label::before{content:"//"; color:var(--ink-soft); opacity:0.5;}
+  h2.title{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:1.9rem;
+    margin:0 0 18px;
+  }
+
+  /* ---- about / education ---- */
+  .about-grid{display:grid; grid-template-columns: 1.3fr 1fr; gap:48px;}
+  .about-grid p{color:var(--ink-soft); margin:0 0 14px;}
+  .edu-card{
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:22px 24px;
+    background:var(--paper-raised);
+  }
+  .edu-card .degree{font-family:'Fraunces', serif; font-size:1.15rem; font-weight:600; margin:0 0 4px;}
+  .edu-card .status{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    color:var(--accent);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+  .edu-card .coursework{margin-top:14px; font-size:0.9rem; color:var(--ink-soft);}
+  .edu-card .coursework span{
+    display:inline-block; border:1px solid var(--line); border-radius:20px;
+    padding:3px 11px; margin:3px 5px 0 0; font-size:0.78rem; font-family:'IBM Plex Mono', monospace;
+    background:var(--paper);
+  }
+
+  /* ---- skills as schema ---- */
+  .schema{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:22px;
+  }
+  .entity{
+    border:1px solid var(--line);
+    border-radius:8px;
+    overflow:hidden;
+    background:var(--paper-raised);
+    position:relative;
+  }
+  .entity-head{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    padding:10px 16px;
+    letter-spacing:0.02em;
+  }
+  .entity ul{list-style:none; margin:0; padding:14px 16px;}
+  .entity li{
+    font-size:0.88rem; color:var(--ink-soft);
+    padding:6px 0;
+    border-bottom:1px dashed var(--line);
+    display:flex; justify-content:space-between; gap:12px;
+  }
+  .entity li:last-child{border-bottom:none;}
+  .entity li .k{color:var(--ink); font-weight:500;}
+  .entity li .t{font-family:'IBM Plex Mono', monospace; font-size:0.74rem; color:var(--accent); white-space:nowrap;}
+
+  /* ---- projects as class cards ---- */
+  .project{
+    border:1px solid var(--line);
+    border-radius:8px;
+    margin-bottom:24px;
+    overflow:hidden;
+    background:var(--paper-raised);
+  }
+  .project-head{
+    padding:16px 22px;
+    border-bottom:1px solid var(--line);
+    display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+  }
+  .project-head .kw{font-family:'IBM Plex Mono', monospace; color:var(--accent); font-size:0.85rem;}
+  .project-head .name{font-family:'Fraunces', serif; font-weight:600; font-size:1.2rem;}
+  .project-head .lang{
+    margin-left:auto; font-family:'IBM Plex Mono', monospace; font-size:0.72rem;
+    color:var(--ink-soft); border:1px solid var(--line); padding:3px 10px; border-radius:20px;
+  }
+  .project-body{padding:18px 22px;}
+  .project-body ul{margin:0; padding-left:20px; color:var(--ink-soft);}
+  .project-body li{margin-bottom:8px; font-size:0.94rem;}
+  .project-body li::marker{color:var(--accent);}
+
+  /* ---- conference ---- */
+  .conf{
+    display:flex; gap:22px; align-items:flex-start;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:22px 24px;
+    background:var(--paper-raised);
+  }
+  .conf .dot{
+    width:10px; height:10px; border-radius:50%;
+    background:var(--accent); margin-top:7px; flex-shrink:0;
+  }
+  .conf h3{font-family:'Fraunces', serif; margin:0 0 6px; font-size:1.1rem;}
+  .conf p{margin:0; color:var(--ink-soft); font-size:0.94rem;}
+
+  /* ---- contact / footer ---- */
+  footer{padding:70px 0 60px; border-top:1px solid var(--line);}
+  footer h2{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:2.1rem;
+    margin:0 0 18px;
+  }
+  footer p{color:var(--ink-soft); max-width:480px; margin:0 0 30px;}
+  .contact-links{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.85rem;
+    padding:12px 20px; border-radius:6px; text-decoration:none;
+    border:1px solid var(--ink); transition:all 0.15s ease;
+  }
+  .btn.primary{background:var(--ink); color:var(--paper);}
+  .btn.primary:hover{background:var(--accent); border-color:var(--accent);}
+  .btn.ghost:hover{background:var(--ink); color:var(--paper);}
+  .foot-note{margin-top:50px; font-size:0.78rem; color:var(--ink-soft); font-family:'IBM Plex Mono', monospace; opacity:0.7;}
+
+  @media (max-width: 720px){
+    .about-grid{grid-template-columns:1fr;}
+    .schema{grid-template-columns:1fr;}
+    .hero{padding:70px 0 50px;}
+    .nav-links{gap:16px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .cursor{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="nav-mark">F. Al Qawasmi</div>
+    <nav class="nav-links">
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="hero">
+    <span class="comment mono">-- fatimah_al_qawasmi.sql</span>
+    <h1>Fatimah Al Qawasmi<br><em>Information Technology.</em></h1>
+    <p class="lede">Building systems from the ground up — from truth tables and logic gates, to normalized databases, to full C++ applications.</p>
+    <div class="query">
+      <span class="kw">SELECT</span> focus <span class="kw">FROM</span> engineer<br>
+      <span class="kw">WHERE</span> name <span class="kw">=</span> <span class="str">'Fatimah Al Qawasmi'</span><span class="cursor"></span>;
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="label">education</div>
+    <div class="about-grid">
+      <div>
+        <h2 class="title">Grounded in fundamentals</h2>
+        <p>My coursework moves across the full stack of computing fundamentals — from the logic gates that build a processor, up through data structures, into the databases and applications that run on top of them. That range is what I bring to every project: I don't just write code, I understand the layers underneath it.</p>
+      </div>
+      <div class="edu-card">
+        <div class="status">In Progress</div>
+        <div class="degree">B.Sc. Information Technology</div>
+        <div class="coursework">
+          <span>C++ Programming</span>
+          <span>Data Structures</span>
+          <span>Database Mgmt (SQL)</span>
+          <span>Digital Logic Design</span>
+          <span>Calculus</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="label">skills</div>
+    <h2 class="title">Schema</h2>
+    <div class="schema">
+      <div class="entity">
+        <div class="entity-head">languages</div>
+        <ul>
+          <li><span class="k">C++</span><span class="t">advanced</span></li>
+          <li><span class="k">SQL</span><span class="t">proficient</span></li>
+        </ul>
+      </div>
+      <div class="entity">
+        <div class="entity-head">databases</div>
+        <ul>
+          <li><span class="k">Schema building</span><span class="t">MySQL</span></li>
+          <li><span class="k">Normalization</span><span class="t">MySQL</span></li>
+          <li><span class="k">Views</span><span class="t">MySQL</span></li>
+        </ul>
+      </div>
+      <div class="entity">
+        <div class="entity-head">digital_logic</div>
+        <ul>
+          <li><span class="k">Truth tables</span><span class="t">design</span></li>
+          <li><span class="k">Multiplexers</span><span class="t">design</span></li>
+          <li><span class="k">Ripple carry adders</span><span class="t">design</span></li>
+        </ul>
+      </div>
+      <div class="entity">
+        <div class="entity-head">tools_&amp;_environments</div>
+        <ul>
+          <li><span class="k">macOS</span><span class="t">os</span></li>
+          <li><span class="k">VS Code</span><span class="t">editor</span></li>
+          <li><span class="k">Xcode</span><span class="t">ide</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="label">projects</div>
+    <h2 class="title">Selected work</h2>
+
+    <div class="project">
+      <div class="project-head">
+        <span class="kw mono">class</span>
+        <span class="name">CarRentalAgencySystem</span>
+        <span class="lang">C++ · OOP</span>
+      </div>
+      <div class="project-body">
+        <ul>
+          <li>Developed an integrated system to manage car reservations and agency operations using object-oriented programming.</li>
+          <li>Engineered dedicated <code class="mono">Agency</code> and <code class="mono">Car</code> classes for logical data structuring and easier long-term maintenance.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <span class="kw mono">schema</span>
+        <span class="name">DatabaseNormalizationProject</span>
+        <span class="lang">SQL · MySQL</span>
+      </div>
+      <div class="project-body">
+        <ul>
+          <li>Designed relational database tables for a university project, applying normalization rules to reduce redundancy and preserve data integrity.</li>
+          <li>Wrote advanced SQL queries to manage, filter, and display data efficiently.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="conference">
+    <div class="label">conferences &amp; research</div>
+    <h2 class="title">Research contribution</h2>
+    <div class="conf">
+      <div class="dot"></div>
+      <div>
+        <h3>Research Conference Presentation</h3>
+        <p>Prepared and delivered the introductory speech for a specialized research project to a conference audience — translating advanced technical concepts into terms a general audience could follow.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's build something.</h2>
+    <p>Open to freelance and internship opportunities in software development, databases, and IT. Reach out or view my full background on LinkedIn.</p>
+    <div class="contact-links">
+      <a class="btn primary" href="https://www.linkedin.com/in/fatimah-al-qawasmi-67a408392" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn ghost" href="mailto:youremail@example.com">Email</a>
+    </div>
+    <div class="foot-note">// add your email above before publishing — © <span id="year"></span> Fatimah Al Qawasmi</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = Array.from(navLinks).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+  const setActive = () => {
+    let current = sections[0];
+    const scrollPos = window.scrollY + 90;
+    for (const sec of sections) {
+      if (sec.offsetTop <= scrollPos) current = sec;
+    }
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current.id);
+    });
+  };
+
+  window.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+</script>
+
+</body>
+</html>
